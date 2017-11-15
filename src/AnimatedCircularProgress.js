@@ -27,7 +27,7 @@ export default class AnimatedCircularProgress extends React.Component {
 
     Animated.timing(this.state.chartFillAnimation, {
       toValue: this.props.fill,
-      duration: 1000,
+      duration: 1050,
       easing: Easing.linear,
     }).start();
   }
