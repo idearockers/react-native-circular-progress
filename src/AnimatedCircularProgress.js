@@ -29,7 +29,11 @@ export default class AnimatedCircularProgress extends React.Component {
       toValue: this.props.fill,
       duration: this.props.animationDuration,
       easing: Easing.linear
-    }).start();
+    }).start(() => {
+      if (this.props.fill === 100) {
+        this.props.onFinish();
+      }
+    });
   }
 
   performLinearAnimation(toValue, duration) {
@@ -47,7 +51,8 @@ export default class AnimatedCircularProgress extends React.Component {
 }
 
 AnimatedCircularProgress.defaultProps = {
-  animationDuration: 1100
+  animationDuration: 1100,
+  onFinish: () => {}
 };
 
 AnimatedCircularProgress.propTypes = {
@@ -58,5 +63,6 @@ AnimatedCircularProgress.propTypes = {
   width: PropTypes.number.isRequired,
   tintColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   backgroundColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  animationDuration: PropTypes.number
+  animationDuration: PropTypes.number,
+  onFinish: PropTypes.func
 };
