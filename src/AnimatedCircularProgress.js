@@ -8,7 +8,7 @@ export default class AnimatedCircularProgress extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chartFillAnimation: new Animated.Value(props.prefill || 0),
+      chartFillAnimation: new Animated.Value(props.prefill || 0)
     };
   }
 
@@ -27,15 +27,15 @@ export default class AnimatedCircularProgress extends React.Component {
 
     Animated.timing(this.state.chartFillAnimation, {
       toValue: this.props.fill,
-      duration: 1100,
-      easing: Easing.linear,
+      duration: this.props.animationDuration,
+      easing: Easing.linear
     }).start();
   }
 
   performLinearAnimation(toValue, duration) {
     Animated.timing(this.state.chartFillAnimation, {
       toValue: toValue,
-      duration: duration,
+      duration: duration
     }).start();
   }
 
@@ -46,6 +46,10 @@ export default class AnimatedCircularProgress extends React.Component {
   }
 }
 
+AnimatedCircularProgress.defaultProps = {
+  animationDuration: 1100
+};
+
 AnimatedCircularProgress.propTypes = {
   style: PropTypes.any,
   size: PropTypes.number.isRequired,
@@ -54,4 +58,5 @@ AnimatedCircularProgress.propTypes = {
   width: PropTypes.number.isRequired,
   tintColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   backgroundColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  animationDuration: PropTypes.number
 };
